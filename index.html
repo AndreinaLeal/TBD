@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flujo de ramas: GitFlow vs TBD</title>
+  <style>
+    body{font-family:Arial,sans-serif;max-width:900px;margin:auto;padding:20px;background:#f5f7fa;color:#222}
+    h1{text-align:center}
+    section{background:#fff;border-radius:8px;padding:16px;margin:20px 0;box-shadow:0 1px 4px #0002}
+    .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+    .branch{padding:8px 14px;border-radius:20px;color:#fff;font-size:14px}
+    .main{background:#c0392b}.develop{background:#2980b9}.feature{background:#27ae60}.pending{background:#95a5a6}
+    .arrow{font-weight:bold}
+    pre{background:#272822;color:#f8f8f2;padding:12px;border-radius:6px;overflow-x:auto}
+  </style>
+</head>
+<body>
+  <h1>Flujo de cambios con técnicas de ramas</h1>
+
+  <section>
+    <h2>GitFlow</h2>
+    <p>Las features salen de <b>develop</b>, se integran a develop y luego se libera a <b>main</b>.</p>
+    <div class="flow">
+      <span class="branch feature">feacture01</span><span class="arrow">→</span>
+      <span class="branch develop">develop</span><span class="arrow">→</span>
+      <span class="branch main">main</span>
+    </div>
+    <div class="flow" style="margin-top:8px">
+      <span class="branch feature">feacture02</span><span class="arrow">→</span>
+      <span class="branch develop">develop</span>
+    </div>
+    <div class="flow" style="margin-top:8px">
+      <span class="branch feature">feacture03</span><span class="arrow">→</span>
+      <span class="branch develop">develop</span>
+    </div>
+    <pre>git merge --no-ff feacture01
+git merge --no-ff feacture02
+git merge --no-ff feacture03</pre>
+  </section>
+
+  <section>
+    <h2>Trunk-Based Development</h2>
+    <p>Ramas cortas que se integran directo al tronco <b>main</b>. Lo incompleto no se integra.</p>
+    <div class="flow">
+      <span class="branch feature">feature-a</span><span class="arrow">→</span><span class="branch main">main</span>
+    </div>
+    <div class="flow" style="margin-top:8px">
+      <span class="branch feature">feature-b</span><span class="arrow">→</span><span class="branch main">main</span>
+    </div>
+    <div class="flow" style="margin-top:8px">
+      <span class="branch pending">feature-c</span><span class="arrow">✗</span><span>sin integrar</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Comparación</h2>
+    <table border="1" cellpadding="8" style="border-collapse:collapse;width:100%">
+      <tr><th></th><th>GitFlow</th><th>TBD</th></tr>
+      <tr><td>Ramas principales</td><td>main + develop</td><td>solo main</td></tr>
+      <tr><td>Duración de features</td><td>Larga</td><td>Muy corta</td></tr>
+      <tr><td>Integración</td><td>Estructurada, por etapas</td><td>Continua</td></tr>
+    </table>
+  </section>
+</body>
+</html>
